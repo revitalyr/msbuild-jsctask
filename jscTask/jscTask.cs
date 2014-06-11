@@ -17,7 +17,7 @@ namespace MSBuild.Community.Tasks.JavaScript {
     }
 
     protected override string GenerateFullPathToTool ( ) {
-      throw new NotImplementedException ( );
+        return string.IsNullOrEmpty(this.ToolPath) ? this.ToolName : System.IO.Path.Combine(this.ToolPath, this.ToolName);
     }
 
     protected override void AddResponseFileCommands (CommandLineBuilderExtension commandLine) {
@@ -34,8 +34,9 @@ namespace MSBuild.Community.Tasks.JavaScript {
       StringBuilder   sb = new StringBuilder ( );
       PropertyInfo[]  properties = GetType ( ).GetProperties ( );
 
-      foreach ( var prop in properties ) {
-        sb.Append (String.Format ("\n  {0} = {1}", prop.Name, dump (prop.GetValue (this))));
+      foreach (var prop in properties)
+      {
+          sb.Append(String.Format("\n  {0} = {1}", prop.Name, dump(prop.GetValue(this, null))));
       }
 
       return sb.ToString ( );
