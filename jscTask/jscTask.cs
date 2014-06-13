@@ -12,6 +12,9 @@ using System.Reflection;
 
 namespace MSBuild.Community.Tasks.JavaScript {
   public class jsc : ManagedCompiler {
+
+    public string Output { get; set; }
+
     protected override string ToolName {
       get { return "jsc.exe";      }
     }
